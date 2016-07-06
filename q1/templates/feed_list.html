@@ -2,8 +2,22 @@
 
 {% block content %}
 
+<div class="pagination">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+            <a href="/feeds?page={{ page_obj.previous_page_number }}">Back</a>
+        {% endif %}
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+            <a href="/feeds?page={{ page_obj.next_page_number }}">Forward</a>
+        {% endif %}
+     </span>
+</div>
+
 <div class='col-sm-6 col-sm-offset-3'>
-    <h2>Rss feeds list</h2>
+    <h2>List of feeds</h2>
     <table class="table">
         <thead>
             <tr>

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from sorl.thumbnail import ImageField, get_thumbnail
 
 
 class Rssf(models.Model):
@@ -16,7 +17,13 @@ class Feed(models.Model):
     created = models.DateField(auto_now=False, auto_now_add=False)
     url = models.URLField()
     author = models.CharField(max_length=256)
-    image_url = models.URLField()
+    image = ImageField(blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = get_thumbnail(self.image,
+                '100x50', quality=99, format='JPEG')
+        super(Feed, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.title
