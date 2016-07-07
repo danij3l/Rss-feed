@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Feed "{{ feed.title }}"</h1><br/>
+    <h3>Title:{{ feed.title }}</h3>
+    <h3>Author:{{ feed.author }}</h3>
+    <h3>Created:{{ feed.created }}</h3>
+    <h3>Image:<img src="{{ feed.image_url }}"/></h3>
+
+{% endblock %}

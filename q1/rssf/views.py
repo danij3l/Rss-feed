@@ -35,3 +35,7 @@ class FeedsListView(ListView):
 
     def get_queryset(self):
         return self.model.objects.all().order_by("-created")
+
+class FeedDetailView(DetailView):
+    template_name = "feed.html"
+    model = Feed

@@ -36,6 +36,7 @@
                     <td>{{ feed.author }}</td>
                     <td>{{ feed.created }}</td>
                     <td><img src="{{ feed.image_url }}"/></td>
+                    <td><a href="{% url 'feed' feed.id  %}">details</td>
                  </tr>
             {% endfor %}
         </tbody>
