@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="get" action="/author/">
+
+<label for="id_q"></label>
+           <input type="text" name="q" id="id_q" placeholder="Enter author's name"/>
+           <input type="submit" value="Search" />
+
+</form>
+
+
+<div>
+    {% if query_string %}
+        <h3>Results for "{{ query_string }}"</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Created</th>
+                    <th>Image</th>
+                 </tr>
+            </thead>
+            <tbody>
+                {% for feed in found_entries %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ feed.title }}</td>
+                        <td>{{ feed.author }}</td>
+                        <td>{{ feed.created }}</td>
+                        <td><img src="{{ feed.image_url }}"/></td>
+                        <td><a href="{% url 'feed' feed.id  %}">details</td>
+                     </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3>Author "{{ query_string }}" doesn't have any feeds.</h3>
+    {% endif %}
+</div>
+
+{% endblock %}
